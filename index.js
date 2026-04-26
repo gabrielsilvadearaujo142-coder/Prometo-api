@@ -3,9 +3,9 @@ import express from "express"
 import axios from "axios"
 const API_KEY = process.env.APIKEY;
 const app = express();
-app.use(Express.json())
+app.use(express.json())
 
-const volunterOrganização = require('./services.js');
+import volunterOrganização from './services.js'
 const PORT = process.env.PORT || 5000
 app.listen(PORT, ()=>console.log("server running"));
 

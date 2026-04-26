@@ -58,4 +58,4 @@ async function volunterOrganização(){
 }
 
 
-export {volunterOrganização};
+export {volunterOrganização, estrategiafunc};

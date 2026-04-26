@@ -6,6 +6,7 @@ const app = express();
 app.use(express.json())
 
 import {volunterOrganização} from './services.js'
+import {estrategiafunc} from './services.js'
 const PORT = process.env.PORT || 5000
 app.listen(PORT, ()=>console.log("server running"));
 

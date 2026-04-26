@@ -1,7 +1,7 @@
 
 import  {Pool} from "pg";
 const pool = new Pool({
-    host : process.env.HOST_db
+    host : process.env.HOST_db,
      user : process.env.USER_db,
     database : process.env.DATABASE_db,
     port : process.env.PORT_db,

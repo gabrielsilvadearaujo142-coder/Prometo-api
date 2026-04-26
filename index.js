@@ -32,8 +32,8 @@ app.get("/getWeather/:city", async (req, res)=>{
 app.get("/volunteers/grupos", async (req, res)=>{
     try{
        const grupos = await volunterOrganização();
-        const res = await estrategiafunc(grupos);
-        res.status(200).json(res);
+        const result = await estrategiafunc(grupos);
+        res.status(200).json(result);
     } catch(err){
         res.status(500).json({error: err.name, motivo: err.message});
     }

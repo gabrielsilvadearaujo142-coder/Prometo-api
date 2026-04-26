@@ -1,6 +1,6 @@
 // Configurando o server!
-const Express = require("express");
-const axios = require("axios")
+import express from "express"
+import axios from "axios"
 const API_KEY = process.env.APIKEY;
 const app = Express();
 app.use(Express.json())

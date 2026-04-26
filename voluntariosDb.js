@@ -1,5 +1,5 @@
 
-const {Pool} = require("pg");
+import  {Pool} from "pg";
 const pool = new Pool({
     host : process.env.HOST,
      user : process.env.USER,
@@ -9,17 +9,15 @@ const pool = new Pool({
 });
 
 
-async function getVolunteersByParticipacao(){
+async function searchUser(id){
     try{
-        const result = await pool.query(
-        `SELECT v.id ,v.nome,
-        v.habilidades, AVG(p.desempenho) as desempenho, 
-        AVG(p.tempo_resposta) as tempo,
-        SUM(CASE WHEN p.compareceu THEN 1 ELSE 0 END) as presenca FROM voluntarios v JOIN participacoes p ON v.id = p.voluntario_id GROUP BY v.id`
-        );
-        return result.rows;
-    }catch(err){
+        const result = await pool.query("SELECT nome, habilidades FROM voluntarios WHERE id = $1", [id])
+        return result.rows[0];
+    }
+    catch(err){
         return {error: err.name, motivo: err.message};
     }
 }
-module.exports = {getVolunteersByParticipacao};
+
+
+export {searchUser};

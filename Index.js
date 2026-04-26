@@ -5,7 +5,7 @@ const API_KEY = process.env.APIKEY;
 const app = Express();
 app.use(Express.json())
 
-const {organizarGrupos} = require('./services.js');
+const volunterOrganização = require('./services.js');
 const PORT = process.env.PORT || 5000
 app.listen(PORT, ()=>console.log("server running"));
 
@@ -30,9 +30,11 @@ app.get("/getWeather/:city", async (req, res)=>{
 
 app.get("/volunteers/grupos", async (req, res)=>{
     try{
-       const grupos = await organizarGrupos();
-        res.status(200).json(grupos);
+       const grupos = await volunterOrganização();
+        const res = await estrategiafunc(grupos);
+        res.status(200).json(res);
     } catch(err){
         res.status(500).json({error: err.name, motivo: err.message});
     }
 })
+

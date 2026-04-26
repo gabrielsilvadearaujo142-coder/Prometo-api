@@ -2,7 +2,7 @@
 import express from "express"
 import axios from "axios"
 const API_KEY = process.env.APIKEY;
-const app = Express();
+const app = express();
 app.use(Express.json())
 
 const volunterOrganização = require('./services.js');

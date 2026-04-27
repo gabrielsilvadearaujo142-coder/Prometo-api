@@ -5,8 +5,8 @@ const API_KEY = process.env.APIKEY;
 const app = express();
 app.use(express.json())
 
-import {volunterOrganização} from './services.js'
-import {estrategiafunc} from './services.js'
+import {volunterOrganização, estrategiafunc} from './services.js';
+import {searchUserById, createUser, deleteUserFromEverything} from './voluntariosDb.js'
 const PORT = process.env.PORT || 5000
 app.listen(PORT, ()=>console.log("server running"));
 
@@ -39,3 +39,37 @@ app.get("/volunteers/grupos", async (req, res)=>{
     }
 })
 
+app.post("/createUser", async (req, res) => {
+    try{
+        const nome = req.body.nome;
+        const idade = req.body.idade;
+        const profissao = req.body.profissao;
+        const experiencia = req.body.experiencia;
+        const habilidades = req.body.habilidades;
+        if(!nome || !idade || !profissao || !experiencia){
+           return res.status(400).json({message: 'dados invalidos' })
+        }
+        const result = await createUser(nome, idade, profissao, experiencia, habilidades);
+        if(result.error){
+            return res.status(400).json(result);
+        }
+        res.status(201).json(result);
+    }catch(err){
+        res.status(500).json({error: err.name , motivo: err.message});
+    }
+})
+
+app.delete("/deleteUser/:id", async (req, res) => {
+    try{
+    const nome = req.body.nome;
+    const id = req.params.id;
+    const result = await deleteUserFromEverything(id, nome);
+        if(result.error){
+            return res.status(400).json(result)
+        }
+        res.status(200).json({message: 'user deleted'});
+    } catch(err){
+        res.json({error: err.name, message: err.message});
+    }
+    
+})

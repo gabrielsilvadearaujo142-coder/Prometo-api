@@ -1,4 +1,4 @@
-import {searchUser} from "./voluntariosDb.js"
+import {searchUserById} from "./voluntariosDb.js"
 
 async function estrategiafunc(grupos){
     const estrategia = [];
@@ -40,7 +40,7 @@ async function volunterOrganização(){
             let id = v.voluntario_id;
             let grupo = v.grupo;
             let score = v.score;
-            let dados = await searchUser(id);
+            let dados = await searchUserById(id);
             let habilidade = dados.habilidades
             grupos[grupo].push({"nome": dados.nome, "score": score, "id": id, "habilidade": habilidade});
         }

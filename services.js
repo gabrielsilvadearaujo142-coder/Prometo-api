@@ -17,11 +17,11 @@ async function estrategiafunc(grupos){
         }
         estrategia.push({
             'grupo': grupo,
-            'lider': lider.nome || "vaga aberta para lider",
-            'suporte': suporte.nome || "vaga aberta para suporte",
-            'backup': backup.nome || "vaga aberta para backup",
+            'lider': lider?.nome || "vaga aberta para lider",
+            'suporte': suporte?.nome || "vaga aberta para suporte",
+            'backup': backup?.nome || "vaga aberta para backup",
             "restante da equipe" : equipe.map(p => p.nome),
-            "plano" : ` O lider do time  coorderna com ajuda do suporte e  backup`
+            "plano" : ` O lider do time  coordena com ajuda do suporte e  backup`
         })
     }
     return estrategia;
